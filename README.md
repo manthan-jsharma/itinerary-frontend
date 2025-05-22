@@ -1,33 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Guide to Itinerary Creation and
+Recommendation.
 
-## Getting Started
+In this Tutorial i will Guide how and what kind of Backend Specific Operations i used to navigate
+this Assessment.
+First let Recap our Project file Structure that makes mind-mapping easier so we can deduce
+resources and alignments faster(for an example if we get some error with our configurations we
+can navigate to this map, get an insight how and where all the files and backend services are
+interconnected, and Figure out an immediate resource for clearance)
+1) Create a Database Config Setup
+Models
+Schemas
+Database config
+Relations
+Then plan out what do we want to Achieve within this Database
+We need Itinerary Creation and Recommendation.
+For that we also need overlaying Data regarding the places, transfers, locations. So we need to
+configure our Database with seeding
+So Our Interconnected structure of Database Files will also include Seed file.
+Final iteration :
+Models
+Schemas
+Database config
+Relations
+Seed_Data
+2) Dissect all the Itinerary Crud APIs
+POST /itineraries/
+GET /itineraries/
+GET /itineraries/{itinerary_id}
+POST /recommendations/
+GET /recommendations/ All this APIs are specific to the Itinerary creation, which is related to our
+Database, Schemas, Models, Relations and seeding.
 
-First, run the development server:
+3) Dissect out The Fast API service and MCP service.
+Plan out the file config for both server and their ports
+In my case i have written both of their configs in run.py, run them in different processes.
+So they both Function for their specific usecases and can be imported and configured easily.
+Now lets plan out the MCP SERVER CONFIG
+1) Create a separate FASTAPI Server
+2) RecommendationRequest from DB (NIghts, regions, budgets.)
+MCP Part came out to be kind of Tricky for me, I have used AI help to Plan out me some
+specific EdgeCases:
+1) If no Itinarary found , try to find closest matches
+2) If still not , try with budget constraints,
+3) Region constraints
+4) If still not then Return any Recommended itinerary, which was a GET API Already
+Setup in our “2nd Step”
+3) Run the MCP server on port 8001.
+With this Setup our goal is to Call the MCP Specific API --> POST /recommend/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+4) FInd out Necessary packages and resources for your setup:
+Ex- Requirement.txt setup for this project :
+fastapi==0.103.1
+uvicorn==0.23.2
+sqlalchemy==2.0.20
+alembic==1.12.0
+psycopg2-binary==2.9.7
+python-dotenv==1.0.0
+pydantic==2.3.0
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+HERE YOU CAN SEE, i also had to use alembic for this, Why do we need both Alembic
+and SqlAlchemy ? I have written a medium article for this
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+https://medium.com/@manthan.jsharma/why-do-we-need-both-alembic-and-sqlalchemy-
+8e6b895bc72b
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+With all these Navigational Planning and setup, now what you need to do is
+follow these steps,
+curate some of your own custom coding skills and logic, can expand on features
+and just create a smooth looking frontend for this.
+With this planning approach we are always alert regarding the
+EdgeCases,
+Service Expansion Criterias,
+Practical Scalability and Logic Building
+Even if you take help from AI, it will not affect much as long as you are having
+understanding about how to integrate backend services, what can their
+limitations be, what custom logic is being demanded from those limitations, how
+scalable features will be created.
+What matters the most is Constant Exposure, Resource Optimisation and a
+kink to solve some Real-World Problems.
+Important Links For Project:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1)Github Frontend: https://github.com/manthan-jsharma/itinerary-frontend
+2)Github Backend: https://github.com/manthan-jsharma/itinerary-backend
+3)Demo Video : https://www.loom.com/share/d3f3e78893f048ee8a5b753eb6fa5cec
+4) Medium Article:
+https://medium.com/@manthan.jsharma/why-do-we-need-both-alembic-and-sqlalchemy-8e6b89
+5bc72b
 
 ## Deploy on Vercel
 
